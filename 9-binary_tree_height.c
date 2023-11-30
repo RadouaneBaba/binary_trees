@@ -1,32 +1,6 @@
 #include "binary_trees.h"
 
 /**
- * longest_tree_path - calculate longest path to the leaf
- * @tree: node to get path of
- * @length: gets longest path
- * @path: calculate path to each leaf
- */
-
-void longest_tree_path(const binary_tree_t *tree, int *length, int *path)
-{
-	if (tree == NULL)
-		return;
-	if (tree->left == NULL && tree->right == NULL)
-	{
-		if (*path > *length)
-		{
-			*length = *path;
-			*path = 0;
-		}
-	}
-	else
-	{
-		(*path)++;
-		longest_tree_path(tree->left, length, path);
-		longest_tree_path(tree->right, length, path);
-	}
-}
-/**
  * binary_tree_height - measure height of tree
  * @tree: pointer to root node of tree
  * Return: height of tree
@@ -34,12 +8,13 @@ void longest_tree_path(const binary_tree_t *tree, int *length, int *path)
 
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-	int path = 0;
-	int height = 0;
+	int left_tree_height, right_tree_height;
 
 	if (tree == NULL)
 		return (0);
-
-	longest_tree_path(tree, &height, &path);
-	return (height--);
+	left_tree_height = binary_tree_height(tree->left);
+	right_tree_height = binary_tree_height(tree->right);
+	if (left_tree_height > right_tree_height)
+		return (left_tree_height + 1);
+	return (right_tree_height + 1);
 }
