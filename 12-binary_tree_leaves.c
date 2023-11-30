@@ -3,7 +3,7 @@
 /**
  * binary_tree_leaves - count leaves in a binary tree
  * @tree: pinter to the root node of the tree
- * Return : number of leaves
+ * Return: number of leaves
  */
 
 size_t binary_tree_leaves(const binary_tree_t *tree)
